@@ -4,7 +4,7 @@ FROM maven:3.6-jdk-11 as builder
 # 将代码复制到容器内
 WORKDIR /app
 COPY pom.xml .
-#COPY src ./src
+COPY src ./src
 # 构建项目
 RUN mvn package -DskipTests
 # 使用 AdoptOpenJDK 作为基础镜像
