@@ -33,7 +33,7 @@
         <property name="trimStrings" value="true"/>
     </javaModelGenerator>
     <!--生成映射xml文件存放位置-->
-    <sqlMapGenerator targetPackage="repo.mapper" targetProject="src/main/resources/">
+    <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources/">
         <property name="enableSubPackages" value="true"/>
     </sqlMapGenerator>
     <!--生成Dao类存放位置(*Mapper.java)-->

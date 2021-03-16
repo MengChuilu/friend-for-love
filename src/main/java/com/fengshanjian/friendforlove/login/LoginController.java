@@ -12,24 +12,22 @@ import java.util.Map;
 @RestController
 public class LoginController {
 
-    String loginUrl = "https://api.weixin.qq.com/sns/jscode2session?" +
-            "appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code";
+    private final static String loginUrl = "https://api.weixin.qq.com";
 
-    @Value("$wx.appid")
-    private String appId;
-    @Value("$wx.secret")
-    private String secretId;
+    @Value("${wx.appid}")
+    public String appId;
+    @Value("${wx.secret}")
+    public String secretId;
 
-    @GetMapping("/login/openId")
-    public String getOpenId(@RequestParam(value = "openId", defaultValue = "") String openId) {
+    @GetMapping("/login/code")
+    public String getOpenId(@RequestParam(value = "code", defaultValue = "") String openId) {
         Map<String, String> params = new HashMap<>();
-        params.put("appid", appId);
-        params.put("secret", secretId);
+        params.put("appid", "wx0104cc3a694ba2e0");
+        params.put("secret", "dfccfe0ac5907bb5a886e8089d011816");
         params.put("js_code", openId);
         params.put("grant_type", "authorization_code");
-        String response = HttpClient.get(loginUrl, "", params);
+        String response = HttpClient.get(loginUrl, "sns/jscode2session", params);
         System.out.println(response);
-
-        return "";
+        return response;
     }
 }

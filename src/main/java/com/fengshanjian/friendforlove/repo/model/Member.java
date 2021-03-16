@@ -3,7 +3,9 @@ package com.fengshanjian.friendforlove.repo.model;
 import java.util.Date;
 
 public class Member {
-    private Integer memberid;
+    private Integer memberId;
+
+    private String openId;
 
     private String nickname;
 
@@ -21,7 +23,7 @@ public class Member {
 
     private String tags;
 
-    private String marriageStatus;
+    private String marriagestatus;
 
     private String degree;
 
@@ -29,7 +31,7 @@ public class Member {
 
     private String car;
 
-    private String slaMarriage;
+    private String slamarriage;
 
     private String householdRegistration;
 
@@ -61,7 +63,7 @@ public class Member {
 
     private String housingLocation;
 
-    private String jobName;
+    private String jobname;
 
     private String blood;
 
@@ -69,12 +71,20 @@ public class Member {
 
     private String pet;
 
-    public Integer getMemberid() {
-        return memberid;
+    public Integer getMemberId() {
+        return memberId;
     }
 
-    public void setMemberid(Integer memberid) {
-        this.memberid = memberid;
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId == null ? null : openId.trim();
     }
 
     public String getNickname() {
@@ -141,12 +151,12 @@ public class Member {
         this.tags = tags == null ? null : tags.trim();
     }
 
-    public String getMarriageStatus() {
-        return marriageStatus;
+    public String getMarriagestatus() {
+        return marriagestatus;
     }
 
-    public void setMarriageStatus(String marriageStatus) {
-        this.marriageStatus = marriageStatus == null ? null : marriageStatus.trim();
+    public void setMarriagestatus(String marriagestatus) {
+        this.marriagestatus = marriagestatus == null ? null : marriagestatus.trim();
     }
 
     public String getDegree() {
@@ -173,12 +183,12 @@ public class Member {
         this.car = car == null ? null : car.trim();
     }
 
-    public String getSlaMarriage() {
-        return slaMarriage;
+    public String getSlamarriage() {
+        return slamarriage;
     }
 
-    public void setSlaMarriage(String slaMarriage) {
-        this.slaMarriage = slaMarriage == null ? null : slaMarriage.trim();
+    public void setSlamarriage(String slamarriage) {
+        this.slamarriage = slamarriage == null ? null : slamarriage.trim();
     }
 
     public String getHouseholdRegistration() {
@@ -301,12 +311,12 @@ public class Member {
         this.housingLocation = housingLocation == null ? null : housingLocation.trim();
     }
 
-    public String getJobName() {
-        return jobName;
+    public String getJobname() {
+        return jobname;
     }
 
-    public void setJobName(String jobName) {
-        this.jobName = jobName == null ? null : jobName.trim();
+    public void setJobname(String jobname) {
+        this.jobname = jobname == null ? null : jobname.trim();
     }
 
     public String getBlood() {

@@ -73,8 +73,10 @@ public class HttpClient {
             for (String key: params.keySet()) {
                 location += (key + "=" + params.get(key) + "&");
             }
+            location = location.substring(0, location.length() - 1);
             Request.Builder builder = new Request.Builder();
             Request request = builder.url(location).build();
+            System.out.println(request.url());
             Response response = HTTP_CLIENT.newCall(request).execute();
 
             if (response.isSuccessful() && Objects.nonNull(response.body())) {

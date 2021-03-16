@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fengshanjian.friendforlove.repo.dao.MemberMapper">
   <resultMap id="BaseResultMap" type="com.fengshanjian.friendforlove.repo.model.Member">
-    <id column="memberid" jdbcType="INTEGER" property="memberid" />
+    <id column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="gender" jdbcType="CHAR" property="gender" />
     <result column="salary" jdbcType="VARCHAR" property="salary" />
@@ -11,29 +12,29 @@
     <result column="height" jdbcType="INTEGER" property="height" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
     <result column="tags" jdbcType="VARCHAR" property="tags" />
-    <result column="marriage-status" jdbcType="VARCHAR" property="marriageStatus" />
+    <result column="marriagestatus" jdbcType="VARCHAR" property="marriagestatus" />
     <result column="degree" jdbcType="VARCHAR" property="degree" />
     <result column="housing" jdbcType="VARCHAR" property="housing" />
     <result column="car" jdbcType="VARCHAR" property="car" />
-    <result column="sla-marriage" jdbcType="VARCHAR" property="slaMarriage" />
-    <result column="household-registration" jdbcType="VARCHAR" property="householdRegistration" />
+    <result column="slamarriage" jdbcType="VARCHAR" property="slamarriage" />
+    <result column="household_registration" jdbcType="VARCHAR" property="householdRegistration" />
     <result column="children" jdbcType="VARCHAR" property="children" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="album" jdbcType="VARCHAR" property="album" />
-    <result column="job-location" jdbcType="VARCHAR" property="jobLocation" />
+    <result column="job_location" jdbcType="VARCHAR" property="jobLocation" />
     <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
-    <result column="job-type" jdbcType="VARCHAR" property="jobType" />
+    <result column="job_type" jdbcType="VARCHAR" property="jobType" />
     <result column="school" jdbcType="VARCHAR" property="school" />
     <result column="father" jdbcType="VARCHAR" property="father" />
     <result column="mother" jdbcType="VARCHAR" property="mother" />
     <result column="brother" jdbcType="VARCHAR" property="brother" />
-    <result column="living-status" jdbcType="VARCHAR" property="livingStatus" />
+    <result column="living_status" jdbcType="VARCHAR" property="livingStatus" />
     <result column="nation" jdbcType="VARCHAR" property="nation" />
-    <result column="job-level" jdbcType="VARCHAR" property="jobLevel" />
-    <result column="housing-location" jdbcType="VARCHAR" property="housingLocation" />
-    <result column="job-name" jdbcType="VARCHAR" property="jobName" />
+    <result column="job_level" jdbcType="VARCHAR" property="jobLevel" />
+    <result column="housing_location" jdbcType="VARCHAR" property="housingLocation" />
+    <result column="jobname" jdbcType="VARCHAR" property="jobname" />
     <result column="blood" jdbcType="VARCHAR" property="blood" />
-    <result column="marriage-type" jdbcType="VARCHAR" property="marriageType" />
+    <result column="marriage_type" jdbcType="VARCHAR" property="marriageType" />
     <result column="pet" jdbcType="VARCHAR" property="pet" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fengshanjian.friendforlove.repo.model.MemberWithBLOBs">
@@ -99,10 +100,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    memberid, nickname, gender, salary, comment, age, height, weight, tags, marriage-status, 
-    degree, housing, car, sla-marriage, household-registration, children, avatar, album, 
-    job-location, birthday, job-type, school, father, mother, brother, living-status, 
-    nation, job-level, housing-location, job-name, blood, marriage-type, pet
+    member_id, open_id, nickname, gender, salary, comment, age, height, weight, tags, 
+    marriagestatus, degree, housing, car, slamarriage, household_registration, children, 
+    avatar, album, job_location, birthday, job_type, school, father, mother, brother, 
+    living_status, nation, job_level, housing_location, jobname, blood, marriage_type, 
+    pet
   </sql>
   <sql id="Blob_Column_List">
     dring, smoking
@@ -145,11 +147,11 @@
     ,
     <include refid="Blob_Column_List" />
     from member
-    where memberid = #{memberid,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from member
-    where memberid = #{memberid,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.fengshanjian.friendforlove.repo.model.MemberExample">
     delete from member
@@ -158,36 +160,39 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.fengshanjian.friendforlove.repo.model.MemberWithBLOBs">
-    insert into member (memberid, nickname, gender, 
-      salary, comment, age, 
-      height, weight, tags, 
-      marriage-status, degree, housing, 
-      car, sla-marriage, household-registration, 
-      children, avatar, album, 
-      job-location, birthday, job-type, 
-      school, father, mother, 
-      brother, living-status, nation, 
-      job-level, housing-location, job-name, 
-      blood, marriage-type, pet, 
-      dring, smoking)
-    values (#{memberid,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
-      #{salary,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{height,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{tags,jdbcType=VARCHAR}, 
-      #{marriageStatus,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{housing,jdbcType=VARCHAR}, 
-      #{car,jdbcType=VARCHAR}, #{slaMarriage,jdbcType=VARCHAR}, #{householdRegistration,jdbcType=VARCHAR}, 
-      #{children,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{album,jdbcType=VARCHAR}, 
-      #{jobLocation,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{jobType,jdbcType=VARCHAR}, 
-      #{school,jdbcType=VARCHAR}, #{father,jdbcType=VARCHAR}, #{mother,jdbcType=VARCHAR}, 
-      #{brother,jdbcType=VARCHAR}, #{livingStatus,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
-      #{jobLevel,jdbcType=VARCHAR}, #{housingLocation,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, 
-      #{blood,jdbcType=VARCHAR}, #{marriageType,jdbcType=VARCHAR}, #{pet,jdbcType=VARCHAR}, 
-      #{dring,jdbcType=BINARY}, #{smoking,jdbcType=BINARY})
+    insert into member (member_id, open_id, nickname, 
+      gender, salary, comment, 
+      age, height, weight, 
+      tags, marriagestatus, degree, 
+      housing, car, slamarriage, 
+      household_registration, children, avatar, 
+      album, job_location, birthday, 
+      job_type, school, father, 
+      mother, brother, living_status, 
+      nation, job_level, housing_location, 
+      jobname, blood, marriage_type, 
+      pet, dring, smoking)
+    values (#{memberId,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{salary,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
+      #{tags,jdbcType=VARCHAR}, #{marriagestatus,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, 
+      #{housing,jdbcType=VARCHAR}, #{car,jdbcType=VARCHAR}, #{slamarriage,jdbcType=VARCHAR}, 
+      #{householdRegistration,jdbcType=VARCHAR}, #{children,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{album,jdbcType=VARCHAR}, #{jobLocation,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{jobType,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{father,jdbcType=VARCHAR}, 
+      #{mother,jdbcType=VARCHAR}, #{brother,jdbcType=VARCHAR}, #{livingStatus,jdbcType=VARCHAR}, 
+      #{nation,jdbcType=VARCHAR}, #{jobLevel,jdbcType=VARCHAR}, #{housingLocation,jdbcType=VARCHAR}, 
+      #{jobname,jdbcType=VARCHAR}, #{blood,jdbcType=VARCHAR}, #{marriageType,jdbcType=VARCHAR}, 
+      #{pet,jdbcType=VARCHAR}, #{dring,jdbcType=BINARY}, #{smoking,jdbcType=BINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.fengshanjian.friendforlove.repo.model.MemberWithBLOBs">
     insert into member
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="memberid != null">
-        memberid,
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="openId != null">
+        open_id,
       </if>
       <if test="nickname != null">
         nickname,
@@ -213,8 +218,8 @@
       <if test="tags != null">
         tags,
       </if>
-      <if test="marriageStatus != null">
-        marriage-status,
+      <if test="marriagestatus != null">
+        marriagestatus,
       </if>
       <if test="degree != null">
         degree,
@@ -225,11 +230,11 @@
       <if test="car != null">
         car,
       </if>
-      <if test="slaMarriage != null">
-        sla-marriage,
+      <if test="slamarriage != null">
+        slamarriage,
       </if>
       <if test="householdRegistration != null">
-        household-registration,
+        household_registration,
       </if>
       <if test="children != null">
         children,
@@ -241,13 +246,13 @@
         album,
       </if>
       <if test="jobLocation != null">
-        job-location,
+        job_location,
       </if>
       <if test="birthday != null">
         birthday,
       </if>
       <if test="jobType != null">
-        job-type,
+        job_type,
       </if>
       <if test="school != null">
         school,
@@ -262,25 +267,25 @@
         brother,
       </if>
       <if test="livingStatus != null">
-        living-status,
+        living_status,
       </if>
       <if test="nation != null">
         nation,
       </if>
       <if test="jobLevel != null">
-        job-level,
+        job_level,
       </if>
       <if test="housingLocation != null">
-        housing-location,
+        housing_location,
       </if>
-      <if test="jobName != null">
-        job-name,
+      <if test="jobname != null">
+        jobname,
       </if>
       <if test="blood != null">
         blood,
       </if>
       <if test="marriageType != null">
-        marriage-type,
+        marriage_type,
       </if>
       <if test="pet != null">
         pet,
@@ -293,8 +298,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="memberid != null">
-        #{memberid,jdbcType=INTEGER},
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
@@ -320,8 +328,8 @@
       <if test="tags != null">
         #{tags,jdbcType=VARCHAR},
       </if>
-      <if test="marriageStatus != null">
-        #{marriageStatus,jdbcType=VARCHAR},
+      <if test="marriagestatus != null">
+        #{marriagestatus,jdbcType=VARCHAR},
       </if>
       <if test="degree != null">
         #{degree,jdbcType=VARCHAR},
@@ -332,8 +340,8 @@
       <if test="car != null">
         #{car,jdbcType=VARCHAR},
       </if>
-      <if test="slaMarriage != null">
-        #{slaMarriage,jdbcType=VARCHAR},
+      <if test="slamarriage != null">
+        #{slamarriage,jdbcType=VARCHAR},
       </if>
       <if test="householdRegistration != null">
         #{householdRegistration,jdbcType=VARCHAR},
@@ -380,8 +388,8 @@
       <if test="housingLocation != null">
         #{housingLocation,jdbcType=VARCHAR},
       </if>
-      <if test="jobName != null">
-        #{jobName,jdbcType=VARCHAR},
+      <if test="jobname != null">
+        #{jobname,jdbcType=VARCHAR},
       </if>
       <if test="blood != null">
         #{blood,jdbcType=VARCHAR},
@@ -409,8 +417,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update member
     <set>
-      <if test="record.memberid != null">
-        memberid = #{record.memberid,jdbcType=INTEGER},
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.openId != null">
+        open_id = #{record.openId,jdbcType=VARCHAR},
       </if>
       <if test="record.nickname != null">
         nickname = #{record.nickname,jdbcType=VARCHAR},
@@ -436,8 +447,8 @@
       <if test="record.tags != null">
         tags = #{record.tags,jdbcType=VARCHAR},
       </if>
-      <if test="record.marriageStatus != null">
-        marriage-status = #{record.marriageStatus,jdbcType=VARCHAR},
+      <if test="record.marriagestatus != null">
+        marriagestatus = #{record.marriagestatus,jdbcType=VARCHAR},
       </if>
       <if test="record.degree != null">
         degree = #{record.degree,jdbcType=VARCHAR},
@@ -448,11 +459,11 @@
       <if test="record.car != null">
         car = #{record.car,jdbcType=VARCHAR},
       </if>
-      <if test="record.slaMarriage != null">
-        sla-marriage = #{record.slaMarriage,jdbcType=VARCHAR},
+      <if test="record.slamarriage != null">
+        slamarriage = #{record.slamarriage,jdbcType=VARCHAR},
       </if>
       <if test="record.householdRegistration != null">
-        household-registration = #{record.householdRegistration,jdbcType=VARCHAR},
+        household_registration = #{record.householdRegistration,jdbcType=VARCHAR},
       </if>
       <if test="record.children != null">
         children = #{record.children,jdbcType=VARCHAR},
@@ -464,13 +475,13 @@
         album = #{record.album,jdbcType=VARCHAR},
       </if>
       <if test="record.jobLocation != null">
-        job-location = #{record.jobLocation,jdbcType=VARCHAR},
+        job_location = #{record.jobLocation,jdbcType=VARCHAR},
       </if>
       <if test="record.birthday != null">
         birthday = #{record.birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="record.jobType != null">
-        job-type = #{record.jobType,jdbcType=VARCHAR},
+        job_type = #{record.jobType,jdbcType=VARCHAR},
       </if>
       <if test="record.school != null">
         school = #{record.school,jdbcType=VARCHAR},
@@ -485,25 +496,25 @@
         brother = #{record.brother,jdbcType=VARCHAR},
       </if>
       <if test="record.livingStatus != null">
-        living-status = #{record.livingStatus,jdbcType=VARCHAR},
+        living_status = #{record.livingStatus,jdbcType=VARCHAR},
       </if>
       <if test="record.nation != null">
         nation = #{record.nation,jdbcType=VARCHAR},
       </if>
       <if test="record.jobLevel != null">
-        job-level = #{record.jobLevel,jdbcType=VARCHAR},
+        job_level = #{record.jobLevel,jdbcType=VARCHAR},
       </if>
       <if test="record.housingLocation != null">
-        housing-location = #{record.housingLocation,jdbcType=VARCHAR},
+        housing_location = #{record.housingLocation,jdbcType=VARCHAR},
       </if>
-      <if test="record.jobName != null">
-        job-name = #{record.jobName,jdbcType=VARCHAR},
+      <if test="record.jobname != null">
+        jobname = #{record.jobname,jdbcType=VARCHAR},
       </if>
       <if test="record.blood != null">
         blood = #{record.blood,jdbcType=VARCHAR},
       </if>
       <if test="record.marriageType != null">
-        marriage-type = #{record.marriageType,jdbcType=VARCHAR},
+        marriage_type = #{record.marriageType,jdbcType=VARCHAR},
       </if>
       <if test="record.pet != null">
         pet = #{record.pet,jdbcType=VARCHAR},
@@ -521,7 +532,8 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update member
-    set memberid = #{record.memberid,jdbcType=INTEGER},
+    set member_id = #{record.memberId,jdbcType=INTEGER},
+      open_id = #{record.openId,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=CHAR},
       salary = #{record.salary,jdbcType=VARCHAR},
@@ -530,29 +542,29 @@
       height = #{record.height,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=INTEGER},
       tags = #{record.tags,jdbcType=VARCHAR},
-      marriage-status = #{record.marriageStatus,jdbcType=VARCHAR},
+      marriagestatus = #{record.marriagestatus,jdbcType=VARCHAR},
       degree = #{record.degree,jdbcType=VARCHAR},
       housing = #{record.housing,jdbcType=VARCHAR},
       car = #{record.car,jdbcType=VARCHAR},
-      sla-marriage = #{record.slaMarriage,jdbcType=VARCHAR},
-      household-registration = #{record.householdRegistration,jdbcType=VARCHAR},
+      slamarriage = #{record.slamarriage,jdbcType=VARCHAR},
+      household_registration = #{record.householdRegistration,jdbcType=VARCHAR},
       children = #{record.children,jdbcType=VARCHAR},
       avatar = #{record.avatar,jdbcType=VARCHAR},
       album = #{record.album,jdbcType=VARCHAR},
-      job-location = #{record.jobLocation,jdbcType=VARCHAR},
+      job_location = #{record.jobLocation,jdbcType=VARCHAR},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
-      job-type = #{record.jobType,jdbcType=VARCHAR},
+      job_type = #{record.jobType,jdbcType=VARCHAR},
       school = #{record.school,jdbcType=VARCHAR},
       father = #{record.father,jdbcType=VARCHAR},
       mother = #{record.mother,jdbcType=VARCHAR},
       brother = #{record.brother,jdbcType=VARCHAR},
-      living-status = #{record.livingStatus,jdbcType=VARCHAR},
+      living_status = #{record.livingStatus,jdbcType=VARCHAR},
       nation = #{record.nation,jdbcType=VARCHAR},
-      job-level = #{record.jobLevel,jdbcType=VARCHAR},
-      housing-location = #{record.housingLocation,jdbcType=VARCHAR},
-      job-name = #{record.jobName,jdbcType=VARCHAR},
+      job_level = #{record.jobLevel,jdbcType=VARCHAR},
+      housing_location = #{record.housingLocation,jdbcType=VARCHAR},
+      jobname = #{record.jobname,jdbcType=VARCHAR},
       blood = #{record.blood,jdbcType=VARCHAR},
-      marriage-type = #{record.marriageType,jdbcType=VARCHAR},
+      marriage_type = #{record.marriageType,jdbcType=VARCHAR},
       pet = #{record.pet,jdbcType=VARCHAR},
       dring = #{record.dring,jdbcType=BINARY},
       smoking = #{record.smoking,jdbcType=BINARY}
@@ -562,7 +574,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update member
-    set memberid = #{record.memberid,jdbcType=INTEGER},
+    set member_id = #{record.memberId,jdbcType=INTEGER},
+      open_id = #{record.openId,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=CHAR},
       salary = #{record.salary,jdbcType=VARCHAR},
@@ -571,29 +584,29 @@
       height = #{record.height,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=INTEGER},
       tags = #{record.tags,jdbcType=VARCHAR},
-      marriage-status = #{record.marriageStatus,jdbcType=VARCHAR},
+      marriagestatus = #{record.marriagestatus,jdbcType=VARCHAR},
       degree = #{record.degree,jdbcType=VARCHAR},
       housing = #{record.housing,jdbcType=VARCHAR},
       car = #{record.car,jdbcType=VARCHAR},
-      sla-marriage = #{record.slaMarriage,jdbcType=VARCHAR},
-      household-registration = #{record.householdRegistration,jdbcType=VARCHAR},
+      slamarriage = #{record.slamarriage,jdbcType=VARCHAR},
+      household_registration = #{record.householdRegistration,jdbcType=VARCHAR},
       children = #{record.children,jdbcType=VARCHAR},
       avatar = #{record.avatar,jdbcType=VARCHAR},
       album = #{record.album,jdbcType=VARCHAR},
-      job-location = #{record.jobLocation,jdbcType=VARCHAR},
+      job_location = #{record.jobLocation,jdbcType=VARCHAR},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
-      job-type = #{record.jobType,jdbcType=VARCHAR},
+      job_type = #{record.jobType,jdbcType=VARCHAR},
       school = #{record.school,jdbcType=VARCHAR},
       father = #{record.father,jdbcType=VARCHAR},
       mother = #{record.mother,jdbcType=VARCHAR},
       brother = #{record.brother,jdbcType=VARCHAR},
-      living-status = #{record.livingStatus,jdbcType=VARCHAR},
+      living_status = #{record.livingStatus,jdbcType=VARCHAR},
       nation = #{record.nation,jdbcType=VARCHAR},
-      job-level = #{record.jobLevel,jdbcType=VARCHAR},
-      housing-location = #{record.housingLocation,jdbcType=VARCHAR},
-      job-name = #{record.jobName,jdbcType=VARCHAR},
+      job_level = #{record.jobLevel,jdbcType=VARCHAR},
+      housing_location = #{record.housingLocation,jdbcType=VARCHAR},
+      jobname = #{record.jobname,jdbcType=VARCHAR},
       blood = #{record.blood,jdbcType=VARCHAR},
-      marriage-type = #{record.marriageType,jdbcType=VARCHAR},
+      marriage_type = #{record.marriageType,jdbcType=VARCHAR},
       pet = #{record.pet,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -602,6 +615,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.fengshanjian.friendforlove.repo.model.MemberWithBLOBs">
     update member
     <set>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
@@ -626,8 +642,8 @@
       <if test="tags != null">
         tags = #{tags,jdbcType=VARCHAR},
       </if>
-      <if test="marriageStatus != null">
-        marriage-status = #{marriageStatus,jdbcType=VARCHAR},
+      <if test="marriagestatus != null">
+        marriagestatus = #{marriagestatus,jdbcType=VARCHAR},
       </if>
       <if test="degree != null">
         degree = #{degree,jdbcType=VARCHAR},
@@ -638,11 +654,11 @@
       <if test="car != null">
         car = #{car,jdbcType=VARCHAR},
       </if>
-      <if test="slaMarriage != null">
-        sla-marriage = #{slaMarriage,jdbcType=VARCHAR},
+      <if test="slamarriage != null">
+        slamarriage = #{slamarriage,jdbcType=VARCHAR},
       </if>
       <if test="householdRegistration != null">
-        household-registration = #{householdRegistration,jdbcType=VARCHAR},
+        household_registration = #{householdRegistration,jdbcType=VARCHAR},
       </if>
       <if test="children != null">
         children = #{children,jdbcType=VARCHAR},
@@ -654,13 +670,13 @@
         album = #{album,jdbcType=VARCHAR},
       </if>
       <if test="jobLocation != null">
-        job-location = #{jobLocation,jdbcType=VARCHAR},
+        job_location = #{jobLocation,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="jobType != null">
-        job-type = #{jobType,jdbcType=VARCHAR},
+        job_type = #{jobType,jdbcType=VARCHAR},
       </if>
       <if test="school != null">
         school = #{school,jdbcType=VARCHAR},
@@ -675,25 +691,25 @@
         brother = #{brother,jdbcType=VARCHAR},
       </if>
       <if test="livingStatus != null">
-        living-status = #{livingStatus,jdbcType=VARCHAR},
+        living_status = #{livingStatus,jdbcType=VARCHAR},
       </if>
       <if test="nation != null">
         nation = #{nation,jdbcType=VARCHAR},
       </if>
       <if test="jobLevel != null">
-        job-level = #{jobLevel,jdbcType=VARCHAR},
+        job_level = #{jobLevel,jdbcType=VARCHAR},
       </if>
       <if test="housingLocation != null">
-        housing-location = #{housingLocation,jdbcType=VARCHAR},
+        housing_location = #{housingLocation,jdbcType=VARCHAR},
       </if>
-      <if test="jobName != null">
-        job-name = #{jobName,jdbcType=VARCHAR},
+      <if test="jobname != null">
+        jobname = #{jobname,jdbcType=VARCHAR},
       </if>
       <if test="blood != null">
         blood = #{blood,jdbcType=VARCHAR},
       </if>
       <if test="marriageType != null">
-        marriage-type = #{marriageType,jdbcType=VARCHAR},
+        marriage_type = #{marriageType,jdbcType=VARCHAR},
       </if>
       <if test="pet != null">
         pet = #{pet,jdbcType=VARCHAR},
@@ -705,11 +721,12 @@
         smoking = #{smoking,jdbcType=BINARY},
       </if>
     </set>
-    where memberid = #{memberid,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fengshanjian.friendforlove.repo.model.MemberWithBLOBs">
     update member
-    set nickname = #{nickname,jdbcType=VARCHAR},
+    set open_id = #{openId,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=CHAR},
       salary = #{salary,jdbcType=VARCHAR},
       comment = #{comment,jdbcType=VARCHAR},
@@ -717,37 +734,38 @@
       height = #{height,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
       tags = #{tags,jdbcType=VARCHAR},
-      marriage-status = #{marriageStatus,jdbcType=VARCHAR},
+      marriagestatus = #{marriagestatus,jdbcType=VARCHAR},
       degree = #{degree,jdbcType=VARCHAR},
       housing = #{housing,jdbcType=VARCHAR},
       car = #{car,jdbcType=VARCHAR},
-      sla-marriage = #{slaMarriage,jdbcType=VARCHAR},
-      household-registration = #{householdRegistration,jdbcType=VARCHAR},
+      slamarriage = #{slamarriage,jdbcType=VARCHAR},
+      household_registration = #{householdRegistration,jdbcType=VARCHAR},
       children = #{children,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       album = #{album,jdbcType=VARCHAR},
-      job-location = #{jobLocation,jdbcType=VARCHAR},
+      job_location = #{jobLocation,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=TIMESTAMP},
-      job-type = #{jobType,jdbcType=VARCHAR},
+      job_type = #{jobType,jdbcType=VARCHAR},
       school = #{school,jdbcType=VARCHAR},
       father = #{father,jdbcType=VARCHAR},
       mother = #{mother,jdbcType=VARCHAR},
       brother = #{brother,jdbcType=VARCHAR},
-      living-status = #{livingStatus,jdbcType=VARCHAR},
+      living_status = #{livingStatus,jdbcType=VARCHAR},
       nation = #{nation,jdbcType=VARCHAR},
-      job-level = #{jobLevel,jdbcType=VARCHAR},
-      housing-location = #{housingLocation,jdbcType=VARCHAR},
-      job-name = #{jobName,jdbcType=VARCHAR},
+      job_level = #{jobLevel,jdbcType=VARCHAR},
+      housing_location = #{housingLocation,jdbcType=VARCHAR},
+      jobname = #{jobname,jdbcType=VARCHAR},
       blood = #{blood,jdbcType=VARCHAR},
-      marriage-type = #{marriageType,jdbcType=VARCHAR},
+      marriage_type = #{marriageType,jdbcType=VARCHAR},
       pet = #{pet,jdbcType=VARCHAR},
       dring = #{dring,jdbcType=BINARY},
       smoking = #{smoking,jdbcType=BINARY}
-    where memberid = #{memberid,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fengshanjian.friendforlove.repo.model.Member">
     update member
-    set nickname = #{nickname,jdbcType=VARCHAR},
+    set open_id = #{openId,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=CHAR},
       salary = #{salary,jdbcType=VARCHAR},
       comment = #{comment,jdbcType=VARCHAR},
@@ -755,30 +773,30 @@
       height = #{height,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
       tags = #{tags,jdbcType=VARCHAR},
-      marriage-status = #{marriageStatus,jdbcType=VARCHAR},
+      marriagestatus = #{marriagestatus,jdbcType=VARCHAR},
       degree = #{degree,jdbcType=VARCHAR},
       housing = #{housing,jdbcType=VARCHAR},
       car = #{car,jdbcType=VARCHAR},
-      sla-marriage = #{slaMarriage,jdbcType=VARCHAR},
-      household-registration = #{householdRegistration,jdbcType=VARCHAR},
+      slamarriage = #{slamarriage,jdbcType=VARCHAR},
+      household_registration = #{householdRegistration,jdbcType=VARCHAR},
       children = #{children,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       album = #{album,jdbcType=VARCHAR},
-      job-location = #{jobLocation,jdbcType=VARCHAR},
+      job_location = #{jobLocation,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=TIMESTAMP},
-      job-type = #{jobType,jdbcType=VARCHAR},
+      job_type = #{jobType,jdbcType=VARCHAR},
       school = #{school,jdbcType=VARCHAR},
       father = #{father,jdbcType=VARCHAR},
       mother = #{mother,jdbcType=VARCHAR},
       brother = #{brother,jdbcType=VARCHAR},
-      living-status = #{livingStatus,jdbcType=VARCHAR},
+      living_status = #{livingStatus,jdbcType=VARCHAR},
       nation = #{nation,jdbcType=VARCHAR},
-      job-level = #{jobLevel,jdbcType=VARCHAR},
-      housing-location = #{housingLocation,jdbcType=VARCHAR},
-      job-name = #{jobName,jdbcType=VARCHAR},
+      job_level = #{jobLevel,jdbcType=VARCHAR},
+      housing_location = #{housingLocation,jdbcType=VARCHAR},
+      jobname = #{jobname,jdbcType=VARCHAR},
       blood = #{blood,jdbcType=VARCHAR},
-      marriage-type = #{marriageType,jdbcType=VARCHAR},
+      marriage_type = #{marriageType,jdbcType=VARCHAR},
       pet = #{pet,jdbcType=VARCHAR}
-    where memberid = #{memberid,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
   </update>
 </mapper>
